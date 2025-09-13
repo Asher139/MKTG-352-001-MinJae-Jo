@@ -1,0 +1,63 @@
+---
+title: "Assignment 1"
+author: "MinJae Jo"
+date: "`2025-09-12"
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+output:
+  pdf_document:
+    highlight: tango
+    toc: false
+    df_print: kable
+    fig_caption: no
+    number_sections: no
+    dev: pdf
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Exercise 1
+
+```{r}
+x <- 2
+```
+
+### Exercise 2
+
+```{r}
+# Create x
+x <- 2
+
+# Check if x is equal to 3
+x == 3
+
+# Remove x
+rm(x)
+
+# Verify that x has been deleted
+exists("x")
+
+```
+### Exercise 3
+```{r}
+# Create a numeric vector
+a <- c(79, 54, 23, 66, 90)
+
+# Print vector
+a
+```
+### Exercise 4
+
+### Exercise 5
+
+### Exercise 6
+
+### Exercise 7
+
+### Exercise 8
+
+### Exercise 9
