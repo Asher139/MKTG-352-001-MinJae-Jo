@@ -139,3 +139,62 @@ cluster_summary
 ```{r}
 write.csv(cluster_summary, "Segment_summary.csv", row.names = FALSE)
 ```
+
+### Part 2
+
+### Step 1
+
+-Intel missed an opportunity in the smartphone era and failed in the smartwatch market by recalling Basis Peak for fever issues. However, the market is growing rapidly, and Apple, Samsung, and Google have become major players. Consumer needs are divided into communication, fitness, and information accessibility. Intel is considering a differentiated entry strategy through partnerships Aetna, Amazon, and Google.
+
+### Step 2
+
+-The question of Business is which segment to target and which partner to collaborate with for the most successful entry. The question of Analytics is to create segments based on survey data, summarize cluster specific features, and suggest optimal strategies by linking them with Intel partnerships.
+
+### Step 3
+
+-Linkage chosen: word.D → The silhouette value is higher and the cluster is balanced.
+
+-Segmentation and descriptor variables: Innov, ConstCom, CreatCom, TimelyInf, SaveM_T, SaveM_L, TaskMgm, DeviceSt, Photo, Wellness, Athlete, Style, Price.
+
+-Descriptor variables: age, iPhone status, income, media usage, prime membership, etc.
+
+-Optimal k:  3 Selection based on dendrogram and silhouette index.
+
+### Step 4
+
+SEGMENT 1: COMMUNICATOR that ConstCom, TimelyInf, Style High. Increase in iPhone users, excessive media consumption.
+
+Segment 2: Wellness Saver that Interested in wellness, low savings, low savings. Price sensitive, interested in Prime/insurance benefits.
+
+Step 3: Athlete that Athlete, device, photo high. Young and skill oriented.
+
+### Step 5
+
+Communicator: (6.5) Large size, strong style/communication needs.
+
+Wellness Saver: (7) Strong connection to insurance/health care, high loyalty potential.
+
+Athletes: (4) Requirements are clear but competitive.
+
+### Step 6
+
+Apple Watch: Best for communicators (notifications, apps, styles).
+
+Fitbit: Best for those who value well-being (health tracking, battery life, affordability).
+
+Samsung Gear: Medium position, strong in TimelyInf and DeviceSt.
+
+### Step 7
+
+-Basis Peak Evaluation: Wellness (6), DeviceSt (5), Athlete (4), TimelyInf (3), Innov (3), Style (3), Price (4) Sensor Wellness Strength, Style and Ecosystem Weakness.
+
+-Partner Score:
+Aetna: Very strong in wellness/save M. (6)
+
+Amazon: TaskMgm, SaveM, Innov have strengths. (5)
+
+Google : Strong in ConstCom, TimelyInf, Innov. (6)
+
+Recommendation: Work with Aetna to target the wellness saver segment.
+
+-Positioning Description: For value-conscious professionals who want a healthier life, Intel Aetna Watch combines Intel's exact sensors with Aetna's rewards to help them live a better life while reducing costs.
