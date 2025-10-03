@@ -30,7 +30,11 @@ output:
     dev: svg
     df_print: kable
 ---
-###Step 1
+
+### Part 1
+
+
+### Step 0
 ```{r}
 suppressPackageStartupMessages({
   library(dplyr)
@@ -38,7 +42,7 @@ suppressPackageStartupMessages({
 })
 ```
 
-###Step 1
+### Step 1
 ```{r}
 Smartwatch <- read.csv("SmartwatchData.csv", stringsAsFactors = FALSE)
 
@@ -53,7 +57,7 @@ summary_stats <- Smartwatch %>%
 
 summary_stats
 ```
-###Step 2
+### Step 2
 ```{r}
 seg_vars <- c("Innov","ConstCom","CreatCom","TimelyInf","SaveM_T","SaveM_L",
               "TaskMgm","DeviceSt","Photo","Wellness","Athlete","Style","Price")
@@ -81,6 +85,7 @@ plot(hc_complete, labels = FALSE, hang = -1, main = "Dendrogram - complete", xla
 plot(hc_ward,     labels = FALSE, hang = -1, main = "Dendrogram - ward.D",   xlab = "", sub = "")
 par(mfrow = c(1,1))
 ```
+
 ### Step 5
 ```{r}
 ks <- 2:10
@@ -109,3 +114,28 @@ rect.hclust(hc_final, k = best_k, border = "red")
 best_method; best_k
 ```
 
+### Step 6
+```{r}
+final_clusters <- cutree(hc_final, k = best_k)
+Smartwatch$Cluster <- factor(final_clusters)
+head(Smartwatch$Cluster)
+```
+
+### Step 7
+```{r}
+cluster_counts <- table(Smartwatch$Cluster)
+cluster_counts
+```
+
+### Step 8
+```{r}
+cluster_summary <- Smartwatch %>%
+  group_by(Cluster) %>%
+  summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)), .groups = "drop")
+cluster_summary
+```
+
+### Step 9
+```{r}
+write.csv(cluster_summary, "Segment_summary.csv", row.names = FALSE)
+```
