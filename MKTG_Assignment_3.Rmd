@@ -1,0 +1,72 @@
+---
+title: "Assignment_3"
+author: "MinJae Jo"
+date: "`r Sys.Date()`"
+documentclass: article
+geometry: margin=1in
+fontsize: 11pt
+output:
+  pdf_document:
+    highlight: tango
+    toc: false
+    df_print: tibble
+    fig_caption: no
+    number_sections: no
+    dev: pdf
+  html_document:
+    highlight: tango
+    self_contained: true
+    theme: paper
+    toc: no
+    df_print: kable
+    fig_caption: no
+    number_sections: no
+    smart: yes
+    dev: svg
+  github_document:
+    html_preview: false
+    toc: true
+    toc_depth: 4
+    dev: svg
+    df_print: kable
+---
+
+```{r, echo=FALSE}
+library(readxl)
+library(GGally)
+TravelerData <- read_excel("Airbnb Case Data-1.xlsx", sheet = "Traveler Data")
+HostData <- read_excel("Airbnb Case Data-1.xlsx", sheet = "Host Data")
+```
+### Exercise 1
+```{r, echo=FALSE, results='hide'}
+
+# --- Summary statistics for TravelerData ---
+# Mean, min, max of Age
+mean(TravelerData$Age, na.rm = TRUE)
+min(TravelerData$Age, na.rm = TRUE)
+max(TravelerData$Age, na.rm = TRUE)
+
+# Category counts
+table(TravelerData$Email_25)
+table(TravelerData$AlaskaFF)
+table(TravelerData$Tickets)
+
+# --- Summary statistics for HostData ---
+# Mean, min, max of Length and ZestimateK
+mean(HostData$Length, na.rm = TRUE)
+min(HostData$Length, na.rm = TRUE)
+max(HostData$Length, na.rm = TRUE)
+
+mean(HostData$ZestimateK, na.rm = TRUE)
+min(HostData$ZestimateK, na.rm = TRUE)
+max(HostData$ZestimateK, na.rm = TRUE)
+
+# Category counts
+table(HostData$Type_Hm)
+table(HostData$Loc_1)
+table(HostData$Loc_2)
+
+# --- Pair plot visualization for selected columns ---
+ggpairs(HostData[, c("Choice", "Length", "Type_Hm", "Guests",
+                     "ZestimateK", "ListPrice", "Rating")])
+```
