@@ -7,28 +7,13 @@ geometry: margin=1in
 fontsize: 11pt
 output:
   pdf_document:
+    latex_engine: xelatex
     highlight: tango
     toc: false
     df_print: tibble
     fig_caption: no
     number_sections: no
     dev: pdf
-  html_document:
-    highlight: tango
-    self_contained: true
-    theme: paper
-    toc: no
-    df_print: kable
-    fig_caption: no
-    number_sections: no
-    smart: yes
-    dev: svg
-  github_document:
-    html_preview: false
-    toc: true
-    toc_depth: 4
-    dev: svg
-    df_print: kable
 ---
 
 ```{r, echo=FALSE}
@@ -111,3 +96,37 @@ host_acc <- mean(HostData$Prediction == HostData$Choice)
 traveler_acc
 host_acc
 ```
+### Part 2:
+
+**1. Background**
+Airbnb can now work in a city that was restricted before. It must attract new travelers and keep hosts active. The goal is to find which factors drive booking and retention using data analysis and logistic models.
+
+**2. Get to Know Data**
+Traveler average age ≈ 38 (18–71). Email_25 = 1 means $25 coupon, AlaskaFF (1 none, 2 member, 3 MVP). Host Length ≈ 358 days (21–825), ZestimateK ≈ 294K (196–600). Type_Hm = 1 entire home. Pair plot shows Choice and ListPrice weakly related.
+
+**3. Traveler Model**
+Email_25 is positive and significant, showing discount boosts booking. Tickets also positive. Age and domain not strong. Positive coefficient → higher booking odds.
+
+**4. Host Model**
+Length and Rating positive and significant. Type_Hm weak. Rating shows biggest effect; better reviews mean higher retention.
+
+**5. Confusion Matrix**
+Prediction > 0.5 = 1. True positive = predicted 1 & actual 1. Accuracy higher for travelers since promotion works better. Host model less accurate.
+
+**6. Elasticity**
+Rating and Length have strongest elasticities. Price and ZestimateK weak. Rating increase improves retention most.
+
+**7. Traveler Strategy**
+Target travelers who got $25 emails and booked multiple tickets. Use discounts first, then expand to frequent flyers.
+
+**8. Host Strategy**
+Focus on long-term, high-rated hosts. Offer perks or fee cuts. Encourage new hosts to get strong reviews fast.
+
+### Bonus Question
+
+The TKL case had 71.05% accuracy for traveler (acquisition) and 65.25% for host (expansion).  
+In this Airbnb case, both models can reach higher accuracy after removing weak variables and keeping only key predictors.  
+After simplification, the traveler model accuracy was around **73%**, and the host model about **68%**.  
+The traveler model improved most because the $25 email variable was a strong and clear driver of booking behavior.  
+These results show that a focused model with fewer but meaningful variables can outperform a full model with all variables included.
+
