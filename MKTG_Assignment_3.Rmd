@@ -37,7 +37,7 @@ library(GGally)
 TravelerData <- read_excel("Airbnb Case Data-1.xlsx", sheet = "Traveler Data")
 HostData <- read_excel("Airbnb Case Data-1.xlsx", sheet = "Host Data")
 ```
-### Exercise 1
+### Step 1
 ```{r, echo=FALSE, results='hide'}
 
 # --- Summary statistics for TravelerData ---
@@ -69,4 +69,45 @@ table(HostData$Loc_2)
 # --- Pair plot visualization for selected columns ---
 ggpairs(HostData[, c("Choice", "Length", "Type_Hm", "Guests",
                      "ZestimateK", "ListPrice", "Rating")])
+```
+
+### Step 2
+```{r, echo=FALSE}
+# Step 2: Logistic Regression Models -----------------------------
+# Traveler Data model 
+TravelerData$Choice <- as.factor(TravelerData$Choice)
+model_traveler <- glm(Choice ~ Age + Email_25 + AlaskaFF + Tickets, 
+                      data = TravelerData, family = binomial)
+summary(model_traveler)
+
+# Host Data model
+HostData$Choice <- as.factor(HostData$Choice)
+model_host <- glm(Choice ~ Length + Type_Hm + Guests + ZestimateK + 
+                  ListPrice + Rating, 
+                  data = HostData, family = binomial)
+summary(model_host)
+```
+
+### Step 3
+```{r, echo=FALSE}
+# Step 3: Model Evaluation and Prediction ----------------------
+
+# Predicted probabilities
+TravelerData$Prob <- predict(model_traveler, type = "response")
+HostData$Prob <- predict(model_host, type = "response")
+
+# Create Prediction variable (1 if prob > 0.5 else 0)
+TravelerData$Prediction <- ifelse(TravelerData$Prob > 0.5, 1, 0)
+HostData$Prediction <- ifelse(HostData$Prob > 0.5, 1, 0)
+
+# Confusion matrices
+table(TravelerData$Prediction, TravelerData$Choice)
+table(HostData$Prediction, HostData$Choice)
+
+# Prediction accuracy
+traveler_acc <- mean(TravelerData$Prediction == TravelerData$Choice)
+host_acc <- mean(HostData$Prediction == HostData$Choice)
+
+traveler_acc
+host_acc
 ```
