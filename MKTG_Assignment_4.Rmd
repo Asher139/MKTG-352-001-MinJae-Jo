@@ -1,0 +1,9 @@
+---
+title: "MKTG_Assignment_4"
+author: "MinJae Jo"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
