@@ -5,5 +5,65 @@ date: "`r Sys.Date()`"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+### Part 1
+
+# Step 1
+```{r}
+MobilMax <- read.csv("MobilMax Case Data-1.csv")
+head(MobilMax)
+```
+
+# Step 2
+```{r step2, echo=FALSE, message=FALSE, warning=FALSE}
+table(MobilMax$Material)
+num_vars <- sapply(MobilMax, is.numeric)
+summary_stats <- data.frame(
+  Min = sapply(MobilMax[, num_vars], min, na.rm = TRUE),
+  Max = sapply(MobilMax[, num_vars], max, na.rm = TRUE),
+  Mean = sapply(MobilMax[, num_vars], mean, na.rm = TRUE)
+)
+summary_stats
+
+```
+# Step 3
+```{r step3, echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(corrplot)) install.packages("corrplot")
+library(corrplot)
+corr_data <- MobilMax[, num_vars]
+corr_matrix <- cor(corr_data)
+corrplot(corr_matrix, method = "color", addCoef.col = "black",
+         tl.col = "black", tl.srt = 45, number.cex = 0.7,
+         title = "Correlation Heatmap", mar = c(0,0,2,0))
+```
+# Step 4
+```{r step4, echo=FALSE, message=FALSE, warning=FALSE}
+MobilMax$Size <- as.factor(MobilMax$Size)
+MobilMax$Weight <- as.factor(MobilMax$Weight)
+MobilMax$Battery <- as.factor(MobilMax$Battery)
+MobilMax$Material <- as.factor(MobilMax$Material)
+model <- lm(Rating ~ Price + Size + Weight + Battery + Material, data = MobilMax)
+summary(model)
+```
+# Step 5
+```{r step5, echo=FALSE, message=FALSE, warning=FALSE}
+utilities <- coef(model)
+utilities
+calc_utility <- function(price, size, weight, battery, material) {
+  base <- utilities["(Intercept)"]
+  
+  # Add numeric variable (price)
+  util <- base + utilities["Price"] * price
+  
+  # Add categorical attributes if not baseline
+  if (paste0("Size", size) %in% names(utilities)) util <- util + utilities[paste0("Size", size)]
+  if (paste0("Weight", weight) %in% names(utilities)) util <- util + utilities[paste0("Weight", weight)]
+  if (paste0("Battery", battery) %in% names(utilities)) util <- util + utilities[paste0("Battery", battery)]
+  if (paste0("Material", material) %in% names(utilities)) util <- util + utilities[paste0("Material", material)]
+  
+  return(util)
+}
+calc_utility(price = 5000, size = "8", weight = "1", battery = "10", material = "Silicon")
+```
+
+
+### Part 2
