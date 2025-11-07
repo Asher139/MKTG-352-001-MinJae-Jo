@@ -2,7 +2,9 @@
 title: "MKTG_Assignment_4"
 author: "MinJae Jo"
 date: "`r Sys.Date()`"
-output: pdf_document
+output:
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 ### Part 1
@@ -67,3 +69,29 @@ calc_utility(price = 5000, size = "8", weight = "1", battery = "10", material = 
 
 
 ### Part 2
+
+1. Background and Problem Statement
+MobileMax once led the Indian tablet market, but lost its share as low-cost brands entered. The MobileMax team was unsure of what was more important: price, battery, or design. There was no clear data to support their opinion. To address this issue, MobileMax decided to use combination analysis to figure out what features people really thought were important. The main goal was to create products that customers liked while maintaining reasonable prices and profitability. This approach to data helped MobileMax regain its footing in the highly competitive market.
+
+2. Understanding the Data
+When we look at the summary and the heat map, price shows the greatest correlation with customer ratings. As the price increases, the rating decreases. Battery life and size have a small but positive effect on satisfaction. In other words, they prefer longer battery life and a larger screen. Weight and material do not significantly affect ratings. In short, people want tablets that are inexpensive, long-lasting, and portable.
+
+3. Understanding Part-worth Utilities
+- Part-worth means how much value each feature adds to a customer’s preference.
+- Based on the regression, (Price) lower is better, (Size) 10 inches gives the best score, (Weight) 1 lb is preferred, (Battery) 10 hours is best, (Material) Silicon is most liked.
+- Price has the biggest impact, because price coefficients have the biggest impact on overall utility. Next is battery life. Other factors have an impact, but not as strong as price.
+
+4. Market Share for Existing Products
+
+| Product | Key Features                           | Approx. Utility | Share |
+| ------- | -------------------------------------- | --------------- | ----- |
+| **A**   | 10k INR / 10 in / 2 lb / 6 h / Ceramic | ≈ –0.65         | ~17 % |
+| **B**   | 8k INR / 8 in / 1 lb / 4 h / Plastic   | ≈ 0.13          | ~43 % |
+| **C**   | 11k INR / 7 in / 0.5 lb / 10 h / Metal | ≈ 0.08          | ~40 % |
+
+
+
+
+
+
+
