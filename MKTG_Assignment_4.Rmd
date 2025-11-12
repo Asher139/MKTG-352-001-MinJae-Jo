@@ -1,6 +1,6 @@
 ---
 title: "MKTG_Assignment_4"
-author: "MinJae Jo"
+author: "MinJae Jo, Greyson Wheeler, Moris Bercian, Vivian McLaughlin, Brendan Pope"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
