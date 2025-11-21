@@ -1,0 +1,56 @@
+---
+title: "MKTG_Assignment_5"
+author: "MinJae Jo, Greyson Wheeler, Moris Bercian, Vivian McLaughlin, Brendan Pope"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+# Step 1
+```{r}
+library(readxl)
+library(GGally)
+library(ggplot2)
+fryo_data <- read_excel("Kreyers Froyo.xlsx", sheet = "Data")
+```
+
+# Step2
+```{r, echo=FALSE}
+summary_stats <- data.frame(
+  Variable = c("National_Advertising", "Local_Advertising",
+               "Online_Advertising", "Price_Index"),
+  Mean = c(mean(fryo_data$National_Advertising, na.rm = TRUE),
+           mean(fryo_data$Local_Advertising, na.rm = TRUE),
+           mean(fryo_data$Online_Advertising, na.rm = TRUE),
+           mean(fryo_data$Price_Index, na.rm = TRUE)),
+  SD = c(sd(fryo_data$National_Advertising, na.rm = TRUE),
+         sd(fryo_data$Local_Advertising, na.rm = TRUE),
+         sd(fryo_data$Online_Advertising, na.rm = TRUE),
+         sd(fryo_data$Price_Index, na.rm = TRUE)),
+  Min = c(min(fryo_data$National_Advertising, na.rm = TRUE),
+          min(fryo_data$Local_Advertising, na.rm = TRUE),
+          min(fryo_data$Online_Advertising, na.rm = TRUE),
+          min(fryo_data$Price_Index, na.rm = TRUE)),
+  Max = c(max(fryo_data$National_Advertising, na.rm = TRUE),
+          max(fryo_data$Local_Advertising, na.rm = TRUE),
+          max(fryo_data$Online_Advertising, na.rm = TRUE),
+          max(fryo_data$Price_Index, na.rm = TRUE)),
+  Count = c(sum(!is.na(fryo_data$National_Advertising)),
+            sum(!is.na(fryo_data$Local_Advertising)),
+            sum(!is.na(fryo_data$Online_Advertising)),
+            sum(!is.na(fryo_data$Price_Index)))
+)
+
+summary_stats
+```
+
+# Step 3
+```{r, echo=FALSE}
+pair_data <- fryo_data[, c("National_Advertising",
+                           "Local_Advertising",
+                           "Online_Advertising",
+                           "Price_Index",
+                           "Sales")]
+
+ggpairs(pair_data)
+```
+
